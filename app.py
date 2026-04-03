@@ -1,22 +1,22 @@
 import streamlit as st
-import joblib
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-model = joblib.load(os.path.join(BASE_DIR, "models", "sentiment_model.pkl"))
-vectorizer = joblib.load(os.path.join(BASE_DIR, "models", "vectorizer.pkl"))
 
 st.title("Sentiment Analyzer 😎")
 
 text = st.text_input("Enter text:")
 
+# Simple keyword-based logic
+positive_words = ["good", "great", "love", "amazing", "happy", "excellent"]
+negative_words = ["bad", "hate", "terrible", "sad", "worst", "angry"]
+
 if st.button("Analyze"):
     if text:
-        vec = vectorizer.transform([text])
-        result = model.predict(vec)[0]
+        text_lower = text.lower()
 
-        if result == 1:
+        if any(word in text_lower for word in positive_words):
             st.success("Positive 😊")
-        else:
+
+        elif any(word in text_lower for word in negative_words):
             st.error("Negative 😠")
+
+        else:
+            st.info("Neutral 😐")
