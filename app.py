@@ -1,14 +1,11 @@
+import streamlit as st
 import joblib
 import os
-import streamlit as st
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-model_path = os.path.join(BASE_DIR, "models", "sentiment_model.pkl")
-vectorizer_path = os.path.join(BASE_DIR, "models", "vectorizer.pkl")
-
-model = joblib.load(model_path)
-vectorizer = joblib.load(vectorizer_path)
+model = joblib.load(os.path.join(BASE_DIR, "models", "sentiment_model.pkl"))
+vectorizer = joblib.load(os.path.join(BASE_DIR, "models", "vectorizer.pkl"))
 
 st.title("Sentiment Analyzer 😎")
 
